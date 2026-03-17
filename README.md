@@ -1,77 +1,60 @@
-# ATM Machine Portal
+# ATM Machine (Python)
 
-## Description
-This Python program is a simple command-line ATM simulation. It asks the user to enter and confirm a PIN, then displays a menu with basic banking options such as checking a balance, depositing money, withdrawing money, or exiting the program.
+Simple command-line ATM simulation built with Python.
 
 ## Features
-- PIN confirmation before access is granted
-- Balance inquiry
-- Deposit money
-- Withdraw money
-- Exit the program
+- Create and confirm a PIN before using the ATM
+- Check current account balance
+- Deposit money into the account
+- Withdraw money with PIN verification
+- Repeat transactions until the user exits
 
-## How It Works
-1. The user enters a PIN.
-2. The user re-enters the PIN to confirm it.
-3. If both PINs match, the program displays an ATM menu.
-4. The user selects one of the available options:
-   - `1` to check balance
-   - `2` to deposit money
-   - `3` to withdraw money
-   - `4` to exit
-5. The program runs the function that matches the selected option.
-
-## Functions
-
-### `menus(pin, pin2)`
-- Welcomes the user
-- Verifies that both PIN entries match
-- Displays the ATM menu
-- Returns the user's menu choice
-
-### `options(choice)`
-- Checks the user's menu selection
-- Calls the correct function based on the selected option
-
-### `checkBalance()`
-- Displays instructions for checking balance
-- Shows a fixed sample balance of `$1,000.00`
-
-### `depositMoney()`
-- Displays deposit instructions
-- Prompts the user to enter an amount to deposit
-- Adds the deposit to the sample balance of `$1000`
-
-### `withdrawMoney(pin)`
-- Displays withdrawal instructions
-- Prompts the user to re-enter their PIN
-- If the PIN is correct, asks for a withdrawal amount
-- Prevents withdrawal if the amount is greater than `$1000`
-
-### `main()`
-- Starts the program
-- Collects the PIN entries
-- Displays the menu
-- Processes the user's choice
+## Project Structure
+- `atm.py`: Main application file with the `Bank` class and program entry point
 
 ## Requirements
-- Python 3
+- Python 3.8+
 
-## How to Run
+## Run the App
+From the project folder, run:
+
 ```bash
 python atm.py
 ```
 
+On some Windows setups, use:
+
+```bash
+py atm.py
+```
+
+## How It Works
+1. User creates a PIN and confirms it.
+2. A `Bank` object is created with:
+   - Initial balance: `1000.00`
+   - Saved PIN for verification
+3. The menu is shown in a loop:
+   - `1` Check Balance
+   - `2` Deposit Money
+   - `3` Withdraw Money
+   - `4` Exit
+4. Withdrawals require entering the correct PIN again.
+
+## Class Overview
+### `Bank`
+- `__init__(pin)`: Stores PIN and starting balance
+- `menus(pin2)`: Confirms setup PIN and returns user menu choice
+- `options(choice)`: Routes selected menu action
+- `checkBalance()`: Displays current balance
+- `depositMoney()`: Adds user-entered amount to balance
+- `withdrawMoney()`: Verifies PIN and subtracts withdrawal amount if valid
+
 ## Notes
-This program is a beginner-friendly ATM simulation. It uses a fixed starting balance of `$1000` and does not save account data permanently.
+- Data is stored in memory only and resets each run.
+- This is a learning project and does not include database storage, encryption, or advanced validation.
 
-## Current Issues in the Code
-- `menus()` is called a second time without the required arguments
-- `withdrawMoney()` expects a `pin` argument, but `options()` calls it without one
-
-## Summary
-This project demonstrates:
-- User input
-- Functions
-- Conditional statements
-- Simple menu-driven program flow
+## Possible Improvements
+- Validate input to prevent non-numeric amount errors
+- Prevent negative deposits/withdrawals
+- Hide PIN input with `getpass`
+- Save account data to a file or database
